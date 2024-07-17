@@ -18,9 +18,7 @@ func main() {
 	r.Static("/static", "./static")
 
 	r.GET("/", func(c *gin.Context) {
-		RenderToBody(c, "index", gin.H{
-			"Body": RenderComponent("button", gin.H{}, gin.H{"hx-on:click": "alert('hello')"}),
-		})
+		RenderToBody(c, "index", RenderComponent("button", gin.H{}, gin.H{"hx-on:click": "alert('hello')"}))
 		return
 	})
 	err = r.Run("0.0.0.0:8080")

@@ -21,8 +21,10 @@ func RenderComponent(name string, params gin.H, htmx gin.H) template.HTML {
 	return template.HTML(buff.String())
 }
 
-func RenderToBody(c *gin.Context, name string, params gin.H) {
-	err := Templates.ExecuteTemplate(c.Writer, name, params)
+func RenderToBody(c *gin.Context, name string, html template.HTML) {
+	err := Templates.ExecuteTemplate(c.Writer, name, gin.H{
+		"Body": html,
+	})
 	if err != nil {
 		panic(err)
 	}
