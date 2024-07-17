@@ -1,5 +1,5 @@
 {{define "button"}}
-    <div class="button mg1 pd1 bg-til tx-white">
+    <div class="button mg1 pd1 bg-til tx-white" {{range .htmx}} {{.}} {{end}}>
         Submit
     </div>
 {{end}}

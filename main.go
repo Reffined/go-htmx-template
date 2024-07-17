@@ -19,7 +19,7 @@ func main() {
 
 	r.GET("/", func(c *gin.Context) {
 		RenderToBody(c, "index", gin.H{
-			"Body": template.HTML(RenderComponent("button", gin.H{})),
+			"Body": RenderComponent("button", gin.H{}, gin.H{"hx-on:click": "alert('hello')"}),
 		})
 		return
 	})
