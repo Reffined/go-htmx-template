@@ -5,15 +5,21 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"html/template"
+	"htmx/htmx"
 )
 
 type Htmx map[string]any
 
-func RenderComponent(name string, params gin.H, htmx Htmx) template.HTML {
+func RenderComponent(name string, params gin.H, htmx Htmx, callbacks ...*htmx.Callback) template.HTML {
 	attr := make([]template.HTMLAttr, 0, len(htmx))
 	for k, v := range htmx {
 		attr = append(attr, template.HTMLAttr(fmt.Sprintf("%s=\"%s\"", k, v)))
 	}
+
+	for _, v := range callbacks {
+		attr = append(attr, template.HTMLAttr(fmt.Sprintf("%s=\"%s\"", v.Event, v.Code)))
+	}
+
 	params["htmx"] = attr
 	buff := &bytes.Buffer{}
 	err := Templates.ExecuteTemplate(buff, name, params)

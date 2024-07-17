@@ -1,5 +1,7 @@
 package htmx
 
+import "io"
+
 const HxGet string = "hx-get"
 const HxPost string = "hx-post"
 const HxPut string = "hx-put"
@@ -26,21 +28,34 @@ type Event string
 type Js string
 
 const (
-	AfterOnLoad          Event = "htmx:afterOnLoad"
-	AfterRequest         Event = "htmx:afterRequest"
-	AfterSettle          Event = "htmx:afterSettle"
-	AfterSwap            Event = "htmx:afterSwap"
-	BeforeCleanupElement Event = "htmx:beforeCleanupElement"
-	BeforeOnLoad         Event = "htmx:beforeOnLoad"
-	BeforeRequest        Event = "htmx:beforeRequest"
-	BeforeSend           Event = "htmx:beforeSend"
-	BeforeSwap           Event = "htmx:beforeSwap"
-	BeforeTransition     Event = "htmx:beforeTransition"
-	ConfigRequest        Event = "htmx:configRequest"
-	Confirm              Event = "htmx:confirm"
-	Load                 Event = "htmx:load"
+	AfterOnLoad          Event = "hx-on:htmx:afterOnLoad"
+	AfterRequest         Event = "hx-on:htmx:afterRequest"
+	AfterSettle          Event = "hx-on:htmx:afterSettle"
+	AfterSwap            Event = "hx-on:htmx:afterSwap"
+	BeforeCleanupElement Event = "hx-on:htmx:beforeCleanupElement"
+	BeforeOnLoad         Event = "hx-on:htmx:beforeOnLoad"
+	BeforeRequest        Event = "hx-on:htmx:beforeRequest"
+	BeforeSend           Event = "hx-on:htmx:beforeSend"
+	BeforeSwap           Event = "hx-on:htmx:beforeSwap"
+	BeforeTransition     Event = "hx-on:htmx:beforeTransition"
+	ConfigRequest        Event = "hx-on:htmx:configRequest"
+	Confirm              Event = "hx-on:htmx:confirm"
+	Load                 Event = "hx-on:htmx:load"
+	Click                Event = "hx-on:click"
 )
 
-func On(event Event, js Js) {
+type Callback struct {
+	Event Event
+	Code  Js
+}
 
+func On(event Event, reader io.Reader) *Callback {
+	bytes, err := io.ReadAll(reader)
+	if err != nil {
+		panic(err)
+	}
+	return &Callback{
+		Code:  Js(bytes),
+		Event: event,
+	}
 }

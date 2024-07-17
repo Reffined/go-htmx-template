@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"github.com/gin-gonic/gin"
 	"html/template"
 	"htmx/htmx"
@@ -23,7 +24,7 @@ func main() {
 			htmx.HxGet:     "/empty",
 			htmx.HxSwap:    htmx.OuterHTML,
 			htmx.HxPushUrl: "true",
-		}))
+		}, htmx.On(htmx.Click, bytes.NewBuffer([]byte("alert('Hello')")))))
 		return
 	})
 
