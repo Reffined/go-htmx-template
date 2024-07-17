@@ -1,0 +1,110 @@
+$black: #222831;
+$grey: #393E46;
+$til: #00ADB5;
+$white: #EEEEEE;
+
+body {
+  background-color: $black;
+}
+
+.pd1 {
+  padding: .5em;
+}
+
+.mg1 {
+  margin: .5em;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  border-radius: .2em;
+  font-family: "Roboto Condensed", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-til {
+  background-color: $til;
+}
+
+.tx-til {
+  color: $til;
+}
+
+.tx-white {
+  color: $white;
+}
+
+.roboto {
+  font-family: "Roboto Condensed", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flalc {
+  align-items: center;
+}
+
+.fljcc {
+  justify-content: center;
+}
+
+
+@mixin flg($size) {
+  flex-grow: $size;
+}
+
+.flg1 {
+  @include flg(1)
+}
+
+.flg2 {
+  @include flg(2)
+}
+
+.flg3 {
+  @include flg(3)
+}
+
+.flg4 {
+  @include flg(4)
+}
+
+.flg5 {
+  @include flg(5)
+}
+
+.flg6 {
+  @include flg(6)
+}
+
+.flg7 {
+  @include flg(7)
+}
+
+.flg8 {
+  @include flg(8)
+}
+
+.flg9 {
+  @include flg(9)
+}
+
+.flg10 {
+  @include flg(10)
+}
