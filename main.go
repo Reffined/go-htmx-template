@@ -19,7 +19,11 @@ func main() {
 	r.Static("/static", "./static")
 
 	r.GET("/", func(c *gin.Context) {
-		RenderToBody(c, RenderComponent("button", gin.H{}, Htmx{htmx.HxGet: "/empty", htmx.HxSwap: htmx.OuterHTML}))
+		RenderToBody(c, RenderComponent("button", gin.H{}, Htmx{
+			htmx.HxGet:     "/empty",
+			htmx.HxSwap:    htmx.OuterHTML,
+			htmx.HxPushUrl: "true",
+		}))
 		return
 	})
 

@@ -21,3 +21,26 @@ const Afterbegin string = "afterbegin"
 const Beforeend string = "beforeend"
 const Afterend string = "afterend"
 const None string = "none"
+
+type Event string
+type Js string
+
+const (
+	AfterOnLoad          Event = "htmx:afterOnLoad"
+	AfterRequest         Event = "htmx:afterRequest"
+	AfterSettle          Event = "htmx:afterSettle"
+	AfterSwap            Event = "htmx:afterSwap"
+	BeforeCleanupElement Event = "htmx:beforeCleanupElement"
+	BeforeOnLoad         Event = "htmx:beforeOnLoad"
+	BeforeRequest        Event = "htmx:beforeRequest"
+	BeforeSend           Event = "htmx:beforeSend"
+	BeforeSwap           Event = "htmx:beforeSwap"
+	BeforeTransition     Event = "htmx:beforeTransition"
+	ConfigRequest        Event = "htmx:configRequest"
+	Confirm              Event = "htmx:confirm"
+	Load                 Event = "htmx:load"
+)
+
+func On(event Event, js Js) {
+
+}
