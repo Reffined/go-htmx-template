@@ -7,7 +7,9 @@ import (
 	"html/template"
 )
 
-func RenderComponent(name string, params gin.H, htmx gin.H) template.HTML {
+type Htmx map[string]any
+
+func RenderComponent(name string, params gin.H, htmx Htmx) template.HTML {
 	attr := make([]template.HTMLAttr, 0, len(htmx))
 	for k, v := range htmx {
 		attr = append(attr, template.HTMLAttr(fmt.Sprintf("%s=\"%s\"", k, v)))
@@ -21,8 +23,8 @@ func RenderComponent(name string, params gin.H, htmx gin.H) template.HTML {
 	return template.HTML(buff.String())
 }
 
-func RenderToBody(c *gin.Context, name string, html template.HTML) {
-	err := Templates.ExecuteTemplate(c.Writer, name, gin.H{
+func RenderToBody(c *gin.Context, html template.HTML) {
+	err := Templates.ExecuteTemplate(c.Writer, "index", gin.H{
 		"Body": html,
 	})
 	if err != nil {

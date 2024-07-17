@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"html/template"
+	"htmx/htmx"
 )
 
 var Templates *template.Template
@@ -18,9 +19,14 @@ func main() {
 	r.Static("/static", "./static")
 
 	r.GET("/", func(c *gin.Context) {
-		RenderToBody(c, "index", RenderComponent("button", gin.H{}, gin.H{"hx-on:click": "alert('hello')"}))
+		RenderToBody(c, RenderComponent("button", gin.H{}, Htmx{htmx.HxGet: "/empty", htmx.HxSwap: htmx.OuterHTML}))
 		return
 	})
+
+	r.GET("/empty", func(c *gin.Context) {
+		RenderToBody(c, RenderComponent("empty", gin.H{}, Htmx{}))
+	})
+
 	err = r.Run("0.0.0.0:8080")
 	if err != nil {
 		panic(err)
