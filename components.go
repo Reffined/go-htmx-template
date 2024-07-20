@@ -2,12 +2,15 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"io"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
 
 type Htmx map[string]any
+type Params map[string]any
 
 func RenderIndex(body string, c *gin.Context) error {
 	err := Templates.ExecuteTemplate(
@@ -21,13 +24,11 @@ func RenderIndex(body string, c *gin.Context) error {
 	return nil
 }
 
-func RenderComp(name string, params gin.H, htmx Htmx) string {
+func RenderComp(name string, params Params) string {
 	buf := bytes.Buffer{}
-	if params != nil && htmx != nil {
-		params["htmx"] = htmx
-	}
 	err := Templates.ExecuteTemplate(&buf, name, params)
 	if err != nil {
+		fmt.Println(err)
 		return err.Error()
 	}
 	return buf.String()
@@ -39,4 +40,12 @@ func Render(c *gin.Context, res string) error {
 		return err
 	}
 	return nil
+}
+
+func MakeHtmx(h Htmx) string {
+	buf := strings.Builder{}
+	for k, v := range h {
+		buf.WriteString(fmt.Sprintf(" %s=\"%s\"", k, v))
+	}
+	return buf.String()
 }

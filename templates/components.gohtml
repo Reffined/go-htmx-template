@@ -1,9 +1,14 @@
 {{define "button"}}
-    <div class="button mg1 pd1 bg-til tx-white">
-        Submit
+    <div class="button mg1 pd1 bg-til tx-white" {{call .MakeHtmx .htmx}}>
+        {{.text}}
     </div>
 {{end}}
 
 {{define "empty"}}
     <div></div>
+{{end}}
+
+{{define "double"}}
+    {{template "button" .bot1}}
+    {{template "button" .bot2}}
 {{end}}

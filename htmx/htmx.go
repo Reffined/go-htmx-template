@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+const HTMX string = "htmx"
+
 const HxGet string = "hx-get"
 const HxPost string = "hx-post"
 const HxPut string = "hx-put"
