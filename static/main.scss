@@ -7,6 +7,11 @@ body {
   background-color: $black;
 }
 
+input {
+  all: unset;
+}
+
+
 .pd1 {
   padding: .5em;
 }

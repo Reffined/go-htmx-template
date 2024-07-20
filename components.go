@@ -24,6 +24,7 @@ func RenderComponent(name string, params gin.H, htmx Htmx, callbacks ...*htmx.Ca
 	buff := &bytes.Buffer{}
 	err := Templates.ExecuteTemplate(buff, name, params)
 	if err != nil {
+		fmt.Println(err)
 		return template.HTML(fmt.Sprintf("Error while rendering %s", name))
 	}
 	return template.HTML(buff.String())
@@ -36,4 +37,9 @@ func RenderToBody(c *gin.Context, html template.HTML) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func Render(c *gin.Context, html template.HTML) error {
+	_, err := io.WriteString(c.Writer, string(html))
+	return err
 }
