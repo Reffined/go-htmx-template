@@ -1,6 +1,9 @@
 package htmx
 
-import "io"
+import (
+	"os"
+	"strings"
+)
 
 const HxGet string = "hx-get"
 const HxPost string = "hx-post"
@@ -49,13 +52,23 @@ type Callback struct {
 	Code  Js
 }
 
-func On(event Event, reader io.Reader) *Callback {
-	bytes, err := io.ReadAll(reader)
+func On(event Event, js Js) *Callback {
+
+	return &Callback{
+		Code:  js,
+		Event: event,
+	}
+}
+
+func OnJs(event Event, path string) *Callback {
+	bytes, err := os.ReadFile(path)
 	if err != nil {
 		panic(err)
 	}
+	code := strings.ReplaceAll(string(bytes), "\"", "'")
+
 	return &Callback{
-		Code:  Js(bytes),
 		Event: event,
+		Code:  Js(code),
 	}
 }
