@@ -28,7 +28,7 @@ func main() {
 	})
 
 	r.GET("/empty", func(c *gin.Context) {
-		RenderToBody(c, RenderComponent("empty", gin.H{}, Htmx{}))
+		Render(c, RenderComponent("empty", gin.H{}, Htmx{}))
 	})
 
 	err = r.Run("0.0.0.0:8080")
