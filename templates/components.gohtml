@@ -4,7 +4,7 @@
     </div>
 {{end}}
 {{define "email"}}
-    <input class="bg-grey tx-white br2 pd-1 roboto wfill" type="email" name="email">
+    <input class="field wfill" type="email" name="email">
 {{end}}
 
 
@@ -13,7 +13,7 @@
 {{end}}
 
 {{define "login"}}
-    <div class="col flalc fljc" style="width: 25%">
+    <div class="col flalc fljc w2">
         <form id="{{.id}}" {{call .MakeHtmx .htmx}} class="col fljc flalc wfill">
             <div class="mgt-1 wfill">
                 {{template "email"}}
