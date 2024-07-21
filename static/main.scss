@@ -3,21 +3,16 @@ $grey: #393E46;
 $til: #00ADB5;
 $white: #EEEEEE;
 
-body {
-  background-color: $black;
-}
+$colors: (white:$white, grey:$grey, til:$til, black:$black);
+$anchors: (s:start, c:center, e:end);
+$dirs: (t:top, r:right, b:bottom, l:left);
 
 input {
   all: unset;
 }
 
-
-.pd1 {
-  padding: .5em;
-}
-
-.mg1 {
-  margin: .5em;
+body {
+  background-color: $black;
 }
 
 .button {
@@ -32,17 +27,44 @@ input {
   justify-content: center;
 }
 
-.bg-til {
-  background-color: $til;
+.wfill {
+  width: 100%;
 }
 
-.tx-til {
-  color: $til;
+.hfill {
+  height: 100%;
 }
 
-.tx-white {
-  color: $white;
+@for $i from 1 through 10 {
+  .mg-#{$i} {
+    margin: #{$i/10 * 5 * 1em};
+  }
+  .pd-#{$i} {
+    padding: #{$i/10 * 5 * 1em};
+  }
 }
+
+@each $k, $v in $dirs {
+  @for $i from 1 through 10 {
+    .mg#{$k}-#{$i} {
+      margin-#{$v}: #{$i/10 * 5 * 1em};
+    }
+    .pd#{$k}-#{$i} {
+      padding-#{$v}: #{$i/10 * 5 * 1em};
+    }
+  }
+}
+
+
+@each $k, $v in $colors {
+  .bg-#{$k} {
+    background-color: #{$v};
+  }
+  .tx-#{$k} {
+    color: #{$v};
+  }
+}
+
 
 .roboto {
   font-family: "Roboto Condensed", sans-serif;
@@ -61,55 +83,28 @@ input {
   flex-direction: row;
 }
 
-.flalc {
-  align-items: center;
+@each $k, $v in $anchors {
+  .flal#{$k} {
+    align-items: $v;
+  }
+  .flj#{$k} {
+    justify-content: $v;
+  }
 }
-
-.fljcc {
-  justify-content: center;
-}
-
 
 @mixin flg($size) {
   flex-grow: $size;
 }
 
-.flg1 {
-  @include flg(1)
+@for $i from 1 through 10 {
+  .flg#{$i} {
+    @include flg($i);
+  }
 }
 
-.flg2 {
-  @include flg(2)
+@for $i from 1 through 5 {
+  .br#{$i} {
+    border-radius: #{$i/10 * 1em};
+  }
 }
 
-.flg3 {
-  @include flg(3)
-}
-
-.flg4 {
-  @include flg(4)
-}
-
-.flg5 {
-  @include flg(5)
-}
-
-.flg6 {
-  @include flg(6)
-}
-
-.flg7 {
-  @include flg(7)
-}
-
-.flg8 {
-  @include flg(8)
-}
-
-.flg9 {
-  @include flg(9)
-}
-
-.flg10 {
-  @include flg(10)
-}

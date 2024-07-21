@@ -1,14 +1,26 @@
 {{define "button"}}
-    <div class="button mg1 pd1 bg-til tx-white" {{call .MakeHtmx .htmx}}>
-        {{.text}}
+    <div>
+        <input type="submit" form="{{.formId}}" class="button pd-1 bg-til tx-white {{.class}}" {{call .MakeHtmx .htmx}}>
     </div>
 {{end}}
-
-{{define "empty"}}
-    <div></div>
+{{define "email"}}
+    <input class="bg-grey tx-white br2 pd-1 roboto wfill" type="email" name="email">
 {{end}}
 
-{{define "double"}}
-    {{template "button" .bot1}}
-    {{template "button" .bot2}}
+
+{{define "empty"}}
+    <div class="roboto">{{.txt}}</div>
+{{end}}
+
+{{define "login"}}
+    <div class="col flalc fljc" style="width: 25%">
+        <form id="{{.id}}" {{call .MakeHtmx .htmx}} class="col fljc flalc wfill">
+            <div class="mgt-1 wfill">
+                {{template "email"}}
+            </div>
+            <div class="row fljs flalc mgt-1 wfill">
+                {{template "button" .submit}}
+            </div>
+        </form>
+    </div>
 {{end}}

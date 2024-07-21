@@ -1,11 +1,11 @@
 package main
 
 import (
+	"fmt"
+	"htmx/htmx"
 	"text/template"
 
 	"github.com/gin-gonic/gin"
-	"htmx/errors"
-	"htmx/htmx"
 )
 
 var Templates *template.Template
@@ -22,41 +22,36 @@ func main() {
 
 	r.GET(
 		"/", func(c *gin.Context) {
-			err := RenderIndex(
-				RenderComp(
-					"double", Params{
-						"bot1": Params{
-							"MakeHtmx": MakeHtmx,
-							"htmx": Htmx{
-								htmx.HxGet:     "/empty",
-								htmx.HxTrigger: "click",
-								htmx.HxTarget:  "body",
-							},
-							"text": "Submit",
-						},
-						"bot2": Params{
-							"MakeHtmx": MakeHtmx,
-							"htmx": Htmx{
-								htmx.HxGet:     "/empty",
-								htmx.HxTrigger: "click",
-								htmx.HxTarget:  "body",
-							},
-							"text": "Test",
-						},
-					},
-				), c,
-			)
+			body := RenderComp("login", Params{
+				"MakeHtmx": MakeHtmx,
+				"htmx": Htmx{
+					htmx.HxPost:   "/empty",
+					htmx.HxTarget: "body",
+				},
+				"id": "login",
+				"submit": Params{
+					"MakeHtmx": MakeHtmx,
+					"htmx":     Htmx{},
+					"formId":   "login",
+					"class":    "flg1",
+				},
+			})
+
+			err := RenderIndex(body, c)
 			if err != nil {
-				errors.InternalServerError(c, err)
-				return
+				panic(err)
 			}
-			return
 		},
 	)
 
-	r.GET(
+	r.POST(
 		"/empty", func(c *gin.Context) {
-			err := Render(c, RenderComp("empty", nil))
+			email, ok := c.GetPostForm("email")
+			if ok {
+				fmt.Println(email)
+			}
+
+			err := Render(c, RenderComp("empty", Params{"txt": email}))
 			if err != nil {
 				panic(err)
 			}
