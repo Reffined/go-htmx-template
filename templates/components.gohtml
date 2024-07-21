@@ -14,11 +14,11 @@
 
 {{define "login"}}
     <div class="col flalc fljc w2">
-        <form id="{{.id}}" {{call .MakeHtmx .htmx}} class="col fljc flalc wfill">
-            <div class="mgt-1 wfill">
+        <form id="{{.id}}" {{call .MakeHtmx .htmx}} class="col fljc flalc w12">
+            <div class="mgt-1 w12">
                 {{template "email"}}
             </div>
-            <div class="row fljs flalc mgt-1 wfill">
+            <div class="row fljs flalc mgt-1 w12">
                 {{template "button" .submit}}
             </div>
         </form>
