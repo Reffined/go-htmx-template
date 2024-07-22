@@ -18,6 +18,13 @@ func main() {
 	r := gin.Default()
 	r.Static("/static", "./static")
 
+	r.GET("/", func(c *gin.Context) {
+		err := RenderIndex("", c)
+		if err != nil {
+			panic(err)
+		}
+	})
+
 	err = r.Run("0.0.0.0:8080")
 	if err != nil {
 		panic(err)
