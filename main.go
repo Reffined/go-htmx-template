@@ -19,10 +19,11 @@ func main() {
 	r.Static("/static", "./static")
 
 	r.GET("/", func(c *gin.Context) {
-		err := RenderIndex("", c)
-		if err != nil {
-			panic(err)
-		}
+		RenderIndex("", c)
+	})
+
+	r.GET("/login", func(c *gin.Context) {
+
 	})
 
 	err = r.Run("0.0.0.0:8080")
