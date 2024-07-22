@@ -4,7 +4,7 @@
 {{end}}
 
 {{define "email"}}
-    <div class="grid grid-col-3 grid-row-2">
+    <div class="grid grid-col-3 grid-row-2 ">
         <label class="col-start-1 col-span-1 row-start-1 row-span-1 text-teal-500  font-medium"
                for="email">Email</label>
         <input class="row-start-2 row-span-1 col-start-1 col-span-2 text-white bg-slate-700 outline outline-2 outline-teal-500 outline-offset-2 rounded p-1 font-medium mt-1 caret-teal-500"
@@ -14,9 +14,26 @@
     </div>
 {{end}}
 
+{{define "password"}}
+    <div class="grid grid-col-3 grid-row-2">
+        <label class="col-start-1 col-span-1 row-start-1 row-span-1 text-teal-500  font-medium"
+               for="pass">Password</label>
+        <input class="row-start-2 row-span-1 col-start-1 col-span-2 text-white bg-slate-700 outline outline-2 outline-teal-500 outline-offset-2 rounded p-1 font-medium mt-1 caret-teal-500"
+               id="pass"
+               type="password"
+               name="password">
+    </div>
+{{end}}
+
+
 {{define "login"}}
     <form class="flex flex-col items-center">
-        {{template "email"}}
+        <div class="w-full">
+            {{template "email"}}
+        </div>
+        <div class="mt-2 w-full">
+            {{template "password"}}
+        </div>
         <div class="mt-4 self-start">
             {{template "submit"}}
         </div>
