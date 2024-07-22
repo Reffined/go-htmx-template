@@ -1,5 +1,24 @@
 {{define "submit"}}
-    <div class=" flex flex-row bg-sky-500 hover:bg-sky-400 p-2 text-white rounded justify-center font-bold shadow-md cursor-pointer">
-        <span class="pointer-events-none">Submit</span>
+    <input type="submit" value="Submit" class=" flex flex-row bg-teal-500 hover:bg-teal-400 active:bg-teal-600 active:shadow-none
+     p-2 text-white rounded justify-center font-bold shadow-md cursor-pointer transition-all">
+{{end}}
+
+{{define "email"}}
+    <div class="grid grid-col-3 grid-row-2">
+        <label class="col-start-1 col-span-1 row-start-1 row-span-1 text-teal-500  font-medium"
+               for="email">Email</label>
+        <input class="row-start-2 row-span-1 col-start-1 col-span-2 text-white bg-slate-700 outline outline-2 outline-teal-500 outline-offset-2 rounded p-1 font-medium mt-1 caret-teal-500"
+               id="email"
+               type="email"
+               name="email">
     </div>
+{{end}}
+
+{{define "login"}}
+    <form class="flex flex-col items-center">
+        {{template "email"}}
+        <div class="mt-4 self-start">
+            {{template "submit"}}
+        </div>
+    </form>
 {{end}}
